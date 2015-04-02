@@ -329,6 +329,7 @@ class Connect:
                 #logFile=self.logger("modbus_results.txt",'='*200+'\n')
                 logFile = open("modbus_results.txt", "a")
                 print "Start Modbus testing"
+                print "test"
 
 
 
