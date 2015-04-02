@@ -77,7 +77,7 @@ class Connect:
             wait=bits/baudrate+15
         return wait
         
-    
+    #serial interpreter
     def serial_interpreter(self,flag,ser):
         if flag==1:
             if self.sbytesize=='8':
