@@ -135,7 +135,7 @@ class Connect:
         ser.writeTimeout = 0     #timeout for write
         return ser
 
-    def settcp(self,host,tcport):
+    def settcp(self,host,tcport,buffer):
         s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
         s.connect((host, tcport))
         return s
@@ -179,6 +179,7 @@ class Connect:
             ser=self.setserial(self.sport,int(self.srate),self.stringTObool(self.sxonxoff.lower().capitalize()),self.stringTObool(self.srtscts.lower().capitalize()),self.stringTObool(self.sdsrdtr.lower().capitalize()))
             self.serial_interpreter(0,ser)
             self.logger('Logger.txt', '='*200+'\n'+'\n')
+            self.logger('Logger.txt', 'Gateway Operating mode: '+self.operationmode+'\n')
             self.logger('Logger.txt', 'Client COM Port: '+self.sport+'\n')
             self.logger('Logger.txt', 'Device COM Port: '+self.comport+'\n')
             self.logger('Logger.txt', 'Interface: '+self.interface+'\n')
@@ -318,7 +319,9 @@ class Connect:
                 tcpport=self.tcport
                 scom=self.sport
                 srate=self.srate
+                self.logger('Logger.txt', '  *'*10+'  Test Name: '+self.TestId+'  *'*10+'\n')
                 self.logger('Logger.txt', '='*200+'\n'+'\n')
+                self.logger('Logger.txt', 'Gateway Operating mode: '+self.operationmode+'\n')
                 self.logger('Logger.txt', 'Client COM Port: '+self.sport+'\n')
                 self.logger('Logger.txt', 'Device COM Port: '+self.comport+'\n')
                 self.logger('Logger.txt', 'Interface: '+self.interface+'\n')
@@ -327,7 +330,7 @@ class Connect:
                 self.logger('Logger.txt', 'Device TCP port: '+self.tcport+'\n')
                 self.logger('Logger.txt','='*200+'\n')
                 #logFile=self.logger("modbus_results.txt",'='*200+'\n')
-                logFile = open("modbus_results.txt", "a")
+                logFile = open("Logger.txt", "a")
                 print "Start Modbus testing"
                 print "test"
 
