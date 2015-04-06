@@ -69,6 +69,6 @@ TestId,TestStatus,serial.port,comport_binding,operationmode,interface,ser.baudra
 61,FALSE,COM5,data1,rawtcpserver,rs232,19200,8,none,1,FALSE,FALSE,FALSE,10.117.64.2,5000,1024,1,filesend.txt
 62,FALSE,COM5,data1,rawtcpserver,rs232,38400,8,none,1,FALSE,FALSE,FALSE,10.117.64.2,5000,1024,1,filesend.txt
 63,FALSE,COM8,data1,rawtcpserver,rs232,57600,8,none,1,FALSE,FALSE,FALSE,192.168.30.21,5000,1024,1,filesend.txt
-64,FALSE,COM8,data1,rawtcpserver,rs232,115200,8,none,1,FALSE,FALSE,FALSE,192.168.30.21,5000,1024,1,filesend.txt
-65,TRUE,COM8,data1,modbustcpserver,rs232,9600,8,none,1,FALSE,FALSE,FALSE,192.168.30.21,502,1024,2,filesend.txt
-66,TRUE,COM8,data1,modbustcpserver,rs232,4800,8,none,1,FALSE,FALSE,FALSE,192.168.30.21,502,1024,2,filesend.txt
+64,TRUE,COM8,data1,rawtcpserver,rs232,115200,8,none,1,FALSE,FALSE,FALSE,192.168.30.2,4500,1024,1,filesend.txt
+65,TRUE,COM8,data1,modbustcpserver,rs232,9600,8,none,1,FALSE,FALSE,FALSE,192.168.30.2,502,1024,2,filesend.txt
+66,TRUE,COM8,data1,modbustcpserver,rs232,4800,8,none,1,FALSE,FALSE,FALSE,192.168.30.2,502,1024,2,filesend.txt
