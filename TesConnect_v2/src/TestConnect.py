@@ -319,6 +319,16 @@ class Connect:
                 tcpport=self.tcport
                 scom=self.sport
                 srate=self.srate
+                _bytesize=int(self.sbytesize)
+                _parity=self.sparity.capitalize()[:1]
+                _stopbits=int(self.sstopbits)
+                _xonxoff=self.stringTObool(self.sxonxoff.lower().capitalize())
+                _rtscts=self.stringTObool(self.srtscts.lower().capitalize())
+                _dsrdtr=self.stringTObool(self.sdsrdtr.lower().capitalize())
+                
+                
+
+                
                 self.logger('Logger.txt', '  *'*10+'  Test Name: '+self.TestId+'  *'*10+'\n')
                 self.logger('Logger.txt', '='*200+'\n'+'\n')
                 self.logger('Logger.txt', 'Gateway Operating mode: '+self.operationmode+'\n')
@@ -347,7 +357,7 @@ class Connect:
                         #self.master = modbus_tcp.TcpMaster("10.117.65.2", 502, 5.0)
                         self.master.set_timeout(15.0)
                         logger.info("master tcp connected")
-                        self.server_slave=modbus_rtu.RtuServer(serial.Serial(port=scom, baudrate=int(srate), bytesize=8, parity='N', stopbits=1, timeout=None, xonxoff=False, rtscts=False, dsrdtr=False))
+                        self.server_slave=modbus_rtu.RtuServer(serial.Serial(port=scom, baudrate=int(srate), bytesize=_bytesize, parity=_parity, stopbits=_stopbits, timeout=None, xonxoff=_xonxoff, rtscts=_rtscts, dsrdtr=_dsrdtr))
                         self.server_slave.start()
                         logger.info("rtu slave connected")
                         self.slave1 = self.server_slave.add_slave(1)
