@@ -57,12 +57,11 @@ class Connect:
         self.buffer=1024
         self.operationmode=''
         
-        '''iplist = open('properties')
+        iplist = open('properties')
         for ip in iplist.readlines():
-            self.telnet = TelnetController.TelnetController(host_name = ip.strip(), user_name = 'admin', password = 'admin', prompt = '#')
-            self.telnet.login()'''
-        
-            
+            self.host=ip.rstrip()
+            self.telnet = TelnetController.TelnetController(host_name = self.host, user_name = 'admin', password = 'admin', prompt = '#')
+            self.telnet.login()
        
     def stringTObool(self,val):
         if val=='False':
@@ -162,7 +161,7 @@ class Connect:
         
         
     def sendreceive(self):
-
+        
         iteration=0
         if self.operationmode=="rawtcpserver":
             count_pckt=0
@@ -172,8 +171,9 @@ class Connect:
             list_time1=list()
             d=Differ()
             self.logger('Logger.txt', '  *'*10+'  Test Name: '+self.TestId+'  *'*10+'\n')
-            self.telnet = TelnetController.TelnetController(host_name = self.host.strip(), user_name = 'admin', password = 'admin', prompt = '#')
+            '''self.telnet = TelnetController.TelnetController(host_name = self.host.strip(), user_name = 'admin', password = 'admin', prompt = '#')
             self.telnet.login()
+            self.telnet.logout()'''
             self.telnetsession(self.comport, self.srate, self.sbytesize, self.interface, self.sparity, self.sstopbits,self.tcport,self.operationmode)
             s=self.settcp(self.host,int(self.tcport),self.buffer)
             ser=self.setserial(self.sport,int(self.srate),self.stringTObool(self.sxonxoff.lower().capitalize()),self.stringTObool(self.srtscts.lower().capitalize()),self.stringTObool(self.sdsrdtr.lower().capitalize()))
@@ -298,8 +298,8 @@ class Connect:
                         self.logger('Logger.txt','Packet loss ratio is: '+str(round(ratio_loss,2))+'%'+'\t'*20+'Packet loss ratio is: '+str(round(ratio_loss1,2))+'%'+'\n')
                         '''self.logger('Logger.txt','Throughput value: '+str(Throughput.getThroughput(self.host))+' Mbps'+'\n')'''
                         #self.logger('Logger.txt','='*200+'\n')
-                        ser.close()
-                        s.close()
+                    ser.close()
+                    s.close()
 
                 except Exception, e1:
                     print e1.__doc__
@@ -311,10 +311,10 @@ class Connect:
                 iteration=iteration+1 ## contor send packets
                 #import SlaveRtu_MasterTcp
                 #self.read_testsuite()
-                self.telnet = TelnetController.TelnetController(host_name = self.host.strip(), user_name = 'admin', password = 'admin', prompt = '#')
+                '''self.telnet = TelnetController.TelnetController(host_name = self.host.strip(), user_name = 'admin', password = 'admin', prompt = '#')
                 self.telnet.login()
+                self.telnet.logout()'''
                 self.telnetsession(self.comport, self.srate, self.sbytesize, self.interface, self.sparity, self.sstopbits,self.tcport,self.operationmode)
-                self.telnet.logout()
                 host=self.host
                 tcpport=self.tcport
                 scom=self.sport
@@ -343,9 +343,9 @@ class Connect:
                         
                     def setUp(self):     
                         """Start testing using RTU over Tcp"""
-                        self.master = modbus_tcp.TcpMaster(host, int(tcpport), 5.0)
+                        self.master = modbus_tcp.TcpMaster(host, int(tcpport), 15.0)
                         #self.master = modbus_tcp.TcpMaster("10.117.65.2", 502, 5.0)
-                        self.master.set_timeout(10.0)
+                        self.master.set_timeout(15.0)
                         logger.info("master tcp connected")
                         self.server_slave=modbus_rtu.RtuServer(serial.Serial(port=scom, baudrate=int(srate), bytesize=8, parity='N', stopbits=1, timeout=None, xonxoff=False, rtscts=False, dsrdtr=False))
                         self.server_slave.start()
@@ -774,7 +774,7 @@ class Connect:
             sxonxoff=10
             srtscts=11
             sdsrdtr=12
-            host=13
+            #host=13
             tcport=14
             packlength=15
             iterations=16
@@ -802,7 +802,7 @@ class Connect:
                     self.sxonxoff=row[fields.sxonxoff]
                     self.srtscts=row[fields.srtscts]
                     self.sdsrdtr=row[fields.sdsrdtr]
-                    self.host=row[fields.host]
+                    #self.host=row[fields.host]
                     self.tcport=row[fields.tcport]
                     self.packlength=row[fields.packlength]
                     self.iterations=row[fields.iterations]
